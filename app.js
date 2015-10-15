@@ -98,7 +98,6 @@ app.delete('/todos/:id', function(req, res) {
     })
 })
 
-var port = process.env.PORT || 3000;
-app.listen(port, function() {
-    console.log("server listening on localhost:" + port);
+app.listen(3000, function() {
+    console.log("server listening on localhost:3000");
 })
