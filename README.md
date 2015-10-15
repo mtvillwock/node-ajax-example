@@ -16,7 +16,7 @@ Example of making an AJAX call to demonstrate interaction between server and cli
 4. Make AJAX request to the server, like `$.ajax({ type: 'get', url: 'api/todos'});`
 
 **Server: Handling the Route**
-1. Set up a route to handle incoming request (specifying the URL of the route and how to respond, e.g., rendering a template that you pass local variables to) like `app.get('/todos', function(req, res) { res.render('index', {todos: todos})})
+1. Set up a route to handle incoming request (specifying the URL of the route and how to respond, e.g., rendering a template that you pass local variables to) like `app.get('/todos', function(req, res) { res.render('index', {todos: todos})})`
 2. Start your server and test it out!
 
 To use:
