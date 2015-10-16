@@ -4,9 +4,9 @@ var app = express();
 
 // require body-parser for parsing form data
 var bodyParser = require('body-parser');
-var parseUrlencoded = bodyParser.urlencoded({
+app.use(bodyParser.urlencoded({
     extended: false
-});
+}));
 
 // set up EJS for view rendering; specify static assets folders
 var ejs = require('ejs');
@@ -43,7 +43,7 @@ app.get('/', function(req, res) {
 })
 
 app.get('/todos', function(req, res) {
-  // search for all Todo object in DB
+    // search for all Todo object in DB
     Todo.find(function(err, todos) {
         if (err) return console.error(err);
         console.log("existing todos are: ", todos);
@@ -54,8 +54,7 @@ app.get('/todos', function(req, res) {
     });
 })
 
-// this route uses parseUrlencoded to add the form data to the req.body object
-app.post('/todos', parseUrlencoded, function(req, res) {
+app.post('/todos', function(req, res) {
     // create a new Todo
     var todo = new Todo({
         title: req.body.title,
@@ -75,15 +74,15 @@ app.post('/todos', parseUrlencoded, function(req, res) {
 })
 
 app.delete('/todos/:id', function(req, res) {
-  // find the todo to delete in the DB
+    // find the todo to delete in the DB
     var target = Todo.findById(req.params.id, function(err, todo) {
         return todo;
     });
 
-  // delete the todo from the DB
+    // delete the todo from the DB
     target.remove(function(err, target) {
         if (err) return handleError(err);
-    // prove that it's gone by failing to find it
+        // prove that it's gone by failing to find it
         Todo.findById(req.params.id, function(err, todo) {
             console.log("todo in find in remove callback: ", todo); // null
             // show all the remaining todos
